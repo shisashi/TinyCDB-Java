@@ -1,0 +1,20 @@
+# customize here
+JDK_HOME   = C:/Program\ Files/Java/jdk1.7.0
+LIBCDBPICA = libcdb_pic.a
+
+CC         = gcc
+CFLAGS     = -mno-cygwin -D__int64='long long' -O3 -Wall -I. -Isrc/main/java -I$(JDK_HOME)/include -I$(JDK_HOME)/include/win32
+JAVAH      = $(JDK_HOME)/bin/javah
+OBJS       = jcdb.o
+
+jcdb.dll: $(OBJS) src/main/c/jcdb.def
+	dllwrap -mno-cygwin --add-stdcall-alias -mwindows --target=i386-mingw32 -def=src/main/c/jcdb.def --driver-name gcc -o $@ -s $(OBJS) -L. -lcdb
+
+net_shisashi_tinycdb_TinyCDBJNI.h: bin/net/shisashi/tinycdb/TinyCDBJNI.class
+	$(JAVAH) -o $@ -classpath bin -jni net.shisashi.tinycdb.TinyCDBJNI
+
+jcdb.o: src/main/c/jcdb.c net_shisashi_tinycdb_TinyCDBJNI.h
+	$(CC) $(CFLAGS) $(CC_INCLUDE) -c src/main/c/jcdb.c -o $@
+
+clean:
+	rm -f $(OBJS) libjcdb.so net.shisashi.tinycdb.TinyCDBJNI

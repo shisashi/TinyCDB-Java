@@ -1,0 +1,14 @@
+*~
+*.swp
+jcdb.o
+jcdb.dll
+net_shisashi_tinycdb_TinyCDBJNI.h
+libjcdb.so
+libcdb.a
+/bin
+/android/obj
+/android/jni/*.[ch]
+/.classpath
+/.project
+/.settings
+/target

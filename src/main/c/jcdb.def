@@ -1,0 +1,6 @@
+LIBRARY jcdb.dll
+EXPORTS
+Java_net_shisashi_tinycdb_TinyCDBJNI_openReader
+Java_net_shisashi_tinycdb_TinyCDBJNI_find
+Java_net_shisashi_tinycdb_TinyCDBJNI_findAll
+Java_net_shisashi_tinycdb_TinyCDBJNI_close
